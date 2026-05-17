@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Helvetica Neue", Arial, sans-serif;
+      }
+
+      body {
+        background-color: #000000;
+        color: #ffffff;
+        min-height: 100vh;
+        padding: 0 10%; /* 左右留白，讓內容置中 */
+      }
+
+      /* --- 導覽列樣式 --- */
+      .navbar {
+        display: flex;
+        justify-content: space-between; /* 讓 Logo 和選單分居左右 */
+        align-items: center;
+        padding: 20px 0;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .nav-links a {
+        color: #ffffff;
+        text-decoration: none;
+        margin-left: 20px;
+        font-size: 1rem;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #3b82f6;
+      }
+
+      .hero-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 50px; /* 左右兩個區塊的間距 */
+        margin-top: 60px;
+      }
+
+      .hero-content {
+        flex: 1; /* 均分空間 */
+        max-width: 500px;
+      }
+
+      .hero-title {
+        font-size: 3rem;
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 20px;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+        color: #ffffff;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+
+      /* 按鈕 */
+      .btn-signup {
+        background-color: #005df3;
+        color: white;
+        border: none;
+        padding: 12px 32px;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 8px; /* 圓角 */
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .btn-signup:hover {
+        background-color: #ffffff;
+      }
+
+      /* 右側圖片 */
+      .hero-image {
+        flex: 1; /* 均分空間 */
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .hero-image img {
+        width: 100%;
+        max-width: 550px;
+        height: auto;
+        object-fit: cover;
+        border-radius: 20px; /* 圖片圓角 */
+      }
+
+      /* 四個狗狗 */
+      .info-section {
+        background-color: #ffffff;
+        color: #000000;
+        padding: 60px 0;
+        margin-top: 80px; /* 與上方區塊保持距離 */
+        text-align: center; /* 讓大標題置中 */
+      }
+
+      .info-heading {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: #000000;
+        margin-bottom: 50px;
+      }
+
+      .card-container {
+        display: flex;
+        justify-content: center; /* 置中 */
+        gap: 30px; /* 卡片跟卡片之間的間距 */
+        flex-wrap: wrap; /* 空間不夠時允許換行） */
+      }
+
+      /* 卡片樣式 */
+      .card {
+        width: 200px; /* 固定寬度 */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* 圖片和文字置中 */
+      }
+
+      .card-image {
+        width: 100%;
+        aspect-ratio: 1 / 1; /* 正方形 */
+        border: 4px solid #000000; /* 藍色邊框 */
+        border-radius: 20px; /* 圓角 */
+        overflow: hidden; /* 圖片不會超出圓角 */
+        margin-bottom: 15px;
+      }
+
+      .card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* 圖片填滿容器 */
+      }
+
+      /* 卡片下方的文字 */
+      .card-text {
+        font-size: 0.95rem;
+        color: #000000; /* 次要文字顏色 */
+        line-height: 1.5;
+        text-align: center;
+      }
+
+      /* 留言區 */
+      .quote-section {
+        background-color: #c9c9ca;
+        color: #000000;
+        padding: 80px 0; /* 上下距離 */
+        width: 100vw; /* 左右整個螢幕 */
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+      }
+
+      /* 限制文字最大寬度，保持置中 */
+      .quote-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        flex-direction: column; /* 讓內文和署名垂直排列 */
+      }
+
+      /* 內文樣式 */
+      .quote-text {
+        font-size: 1.8rem;
+        font-style: italic; /* 斜體字 */
+        font-weight: 300; /* 偏細的字體線條 */
+        color: #000000;
+        line-height: 1.4;
+        margin-bottom: 15px;
+      }
+
+      /* 署名樣式 */
+      .quote-author {
+        font-size: 1.2rem;
+        font-weight: bold;
+        font-style: normal; /* 署名恢復正常字體，不使用斜體 */
+        color: #0f172a;
+        text-align: right; /* 靠右對齊 */
+      }
+
+      /* 尾頁 */
+      .cta-section {
+        background-color: #ffffff; 
+        padding: 80px 0;
+        display: flex;
+        justify-content: center; /* 置中 */
+        align-items: center;
+      }
+
+      /* 主體 */
+      .cta-box {
+        background-color: #6a6a72; 
+        color: #ffffff;
+        width: 100%;
+        max-width: 950px; /* 限制最大寬度 */
+        padding: 50px 80px; /* 上下左右距離 */
+        border-radius: 12px; /* 圓角 */
+        display: flex;
+        justify-content: space-between; /* 文字在左、按鈕在右 */
+        align-items: center; /* 垂直置中 */
+      }
+
+      /* 左側文字 */
+      .cta-text h3 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .cta-text p {
+        font-size: 1rem;
+        color: #e0f2fe; 
+      }
+
+      /* 右側按鈕 */
+      .btn-cta-signup {
+        background-color: transparent; 
+        color: #ffffff;
+        border: 2px solid #ffffff; /* 白色邊框 */
+        padding: 10px 30px;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
+        transition:
+          background-color 0.3s,
+          color 0.3s;
+      }
+
+      .btn-cta-signup:hover {
+        background-color: #ffffff; /* 滑鼠移上去時背景變全白 */
+        color: #000000; 
+      }
+
+      /* 頁尾樣式*/
+      .footer {
+        background-color: #000000;
+        color: #ffffff; 
+        text-align: center; /* 置中 */
+        padding: 40px 0;
+        font-size: 0.95rem;
+
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+      }
+
+      /* 手機板 */
+
+      @media (max-width: 768px) {
+        body {
+          padding: 0 5%;
+        }
+
+        .hero-container {
+          flex-direction: column-reverse;
+          text-align: center;
+          margin-top: 30px;
+        }
+
+        .hero-image {
+          justify-content: center;
+          margin-bottom: 30px;
+        }
+
+        .hero-title {
+          font-size: 2.2rem;
+        }
+
+        .info-heading {
+          font-size: 1.8rem;
+          margin-bottom: 30px;
+        }
+
+        .card-container {
+          gap: 40px;
+        }
+
+        .card {
+          width: 70%;
+        }
+
+        .quote-section {
+          padding: 50px 0;
+        }
+
+        .quote-text {
+          font-size: 1.4rem; /* 適度縮小字體 */
+          line-height: 1.5;
+        }
+
+        .quote-author {
+          font-size: 1rem;
+        }
+
+        .cta-section {
+          padding: 40px 20px;
+        }
+
+        .cta-box {
+          flex-direction: column; /*文字跟按鈕改成上下排列 */
+          text-align: center;
+          gap: 30px;
+          padding: 40px 30px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="logo">Dog Logo</div>
+      <nav class="nav-links">
+        <a href="#">參選</a>
+        <a href="#">投資</a>
+        <a href="#">加入</a>
+        <a href="#">關注</a>
+        <a href="#">聯繫</a>
+      </nav>
+    </header>
+
+    <main class="hero-container">
+      <div class="hero-content">
+        <h1 class="hero-title">這是狗的拍賣會</h1>
+        <p class="hero-subtitle">
+          手上設定哪個主要具備鄉民們因而處理器，少年也沒周邊老婆死了股市名字出台包括障礙設定，備案氣氛法律開始監管堅持關鍵字給予，前來衣服今後規模，處理器理念，溫柔業績視頻命運文章青春都有，聯想歌手即使，不論高中讓你眼裡因此一致說是程式實力將在最初現象漢化研究生日。
+        </p>
+        <button class="btn-signup">按</button>
+      </div>
+
+      <div class="hero-image">
+        <img
+          src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=200"
+          alt="Cute Golden Retriever"
+        />
+      </div>
+    </main>
+    <section class="info-section">
+      <h2 class="info-heading">逼逼八餔</h2>
+
+      <div class="card-container">
+        <div class="card">
+          <div class="card-image">
+            <img
+              src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=200"
+              alt="Golden Retriever"
+            />
+          </div>
+          <p class="card-text">
+            基金批評雖然可見出了小心，表演描述資料庫甚至是誰您現在增加一下難得職業時候，大多鄉民們逐步，消除重視不再類型特色倒是，將其娛樂外面貿易整合所說分鐘那就別的，隨後都是以及本書眼光紀念渠道傳奇，結束覺得昨日很好司機參加容量處於商品打電話我想，專區瀏覽次數，黑。
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-image">
+            <img
+              src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=200"
+              alt="Golden Retriever"
+            />
+          </div>
+          <p class="card-text">
+            高效演唱會已有，本網站供求，依據附件是誰，看出的話等等大聲畢業生懷疑郵遞區號考生防止職業，尋求首先崗位麻煩方法下午瘋狂地上大大主題迅速理念實在，宜蘭金屬最好什麼是原文雙手註冊時間義務，能量身材排名編輯可能，在於因此當地擁有我們正是當時，英語報價國人汽車它。
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-image">
+            <img
+              src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=200"
+              alt="Golden Retriever"
+            />
+          </div>
+          <p class="card-text">
+            妻子培養，明年有了還沒所在幽默故事危機全市，廠家成立以為交通男孩特性複製反對只是全文後來萬華體內指揮，需要投入訂單多年出租互動不可能前後精美種種不然因此注重，走向平方米有時候老大流行主流立刻意思預期有可能等等如果你，我在狀態交換同樣處於轎車，很好研究生紛。
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-image">
+            <img
+              src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=200"
+              alt="Golden Retriever"
+            />
+          </div>
+          <p class="card-text">
+            多多不要包括會員化工家人，本地下載去年方面伺服器斗內鬱悶可能會並不加盟相互，反饋男女電視你有女兒十二訓練一會兒取得搭配溫暖，小七當天地下差不多客服民族您可以不太電視，道理文檔具有女友印度美好鏡頭右鍵看出大家，忽然運行意味着只見，由此滿意服飾父母不說地說給。
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="quote-section">
+      <div class="quote-container">
+        <blockquote class="quote-text">
+          "號碼答應加工站在大學生本科都能管理員左右次數對他苗栗對手一體非常犯罪資產再次阿摩斯主流此外很久發展身邊有很多的說未來淡淡民族內存退出只好綜合小學明星數字比如這就是媒體你就是一個友情連結眼睛網際網路符合浙江魯蛇正式汽車只能湖口整合裝修觀察"
+        </blockquote>
+        <cite class="quote-author">-阿姆斯特丹</cite>
+      </div>
+    </section>
+    <section class="cta-section">
+      <div class="cta-box">
+        <div class="cta-text">
+          <h3>Call to me!</h3>
+          <p>
+            政府留在想像或者列表被人筆記本曝光歌曲對了對面，兩次好激動，需要導航來自反正世紀類別所謂效果本來精神，意義是一種相同部分這是推出加入各位。
+          </p>
+        </div>
+        <div class="cta-action">
+          <button class="btn-cta-signup">點</button>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <p>Copyright © The Odin Project 2030</p>
+    </footer>
+  </body>
+</html>
